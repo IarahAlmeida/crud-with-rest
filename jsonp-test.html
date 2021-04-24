@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+    <head>
+        <title>Jsonp Test</title> </head>
+    <body>
+        <code id="jsonResult">Initial state</code>
+        <script>
+            console.log('Callback script')
+            /* Uncaught SyntaxError: unexpected token: ':' */
+            function myCallback(dataWeGotViaJsonp) {
+                console.log(dataWeGotViaJsonp)
+                document.getElementById('jsonResult').innerHTML = dataWeGotViaJsonp;
+            }
+        </script>
+        <script type="text/javascript" src="https://miniapp-ifnmg.herokuapp.com/usuario/6231704af5b7?callback=myCallback"></script>
+    </body>
+</html>
