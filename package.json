@@ -1,7 +1,11 @@
 {
-  "name": "si",
+  "name": "crud-with-json",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "6.14.8",
+    "node": "12.18.4"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
