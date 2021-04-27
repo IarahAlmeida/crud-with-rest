@@ -1,7 +1,7 @@
-// import axios from 'axios'
+import axios from 'axios'
 // import jsonp from 'jsonp'
 
-// import {API_URL} from '../utils/constans'
+import {API_URL} from '../utils/constans'
 
 export const authenticate = async (token) => {
     // var target = document.getElementsByTagName('script')[0] || document.head
@@ -19,19 +19,19 @@ export const authenticate = async (token) => {
     //     // }
     // })
 
-    // const result = await axios
-    //     .get(`${API_URL}/${token}`)
-    //     .then((response) => {
-    //         console.log(response)
-    //         return response.data
-    //     })
-    //     .catch((error) => {
-    //         console.error(error)
-    //         return false
-    //     })
-    // return result
+    const result = await axios
+        .get(`${API_URL}/${token}`)
+        .then((response) => {
+            console.log(response)
+            return response.data
+        })
+        .catch((error) => {
+            console.log(error)
+            return false
+        })
+    return result
     
     // hardcoded authentication
-    return token === '6231704af5b7' ? true : false;
+    // return token === '6231704af5b7' ? true : false;
     
 }
