@@ -23,7 +23,7 @@ const SignIn = () => {
                     <p className='title has-text-dark has-text-weight-semibold text-primary mb-6'>CRUD with REST</p>
                     <p className='subtitle has-text-dark has-text-weight-medium mb-6'>Authentication</p>
                     <Formik
-                        initialValues={{ token: '6231704af5b7' }}
+                        initialValues={{ token: '' }}
                         onSubmit={async (values, actions) => {
                             const result = await authenticate(values.token)
                             result ? toast.success('Authenticated!') : toast.error('Authentication failed')
