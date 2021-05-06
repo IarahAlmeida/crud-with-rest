@@ -1,9 +1,6 @@
 import axios from 'axios'
-// import { API_URL } from '../utils/constans'
+import { API_URL } from '../utils/constans'
 import { handleError } from './handleError.service'
-
-/* overwriting default api url */
-const API_URL = 'https://jsonplaceholder.typicode.com'
 
 export const readItems = async (suffix) => {
     const result = await axios

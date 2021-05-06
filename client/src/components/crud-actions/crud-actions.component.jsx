@@ -13,10 +13,11 @@ const CrudActions = (props) => {
     const handleDelete = async () => {
         const response = await deleteItem(props.suffix, props.id)
         if (response === 204) {
-            toast.success('Delete successful')
+            toast.success('Delete successful.')
         } else {
             toast.warning(DEFAULT_ERROR_MESSAGE)
         }
+        props.setShouldUpdate(true)
     }
 
     return (

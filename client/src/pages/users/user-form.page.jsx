@@ -1,15 +1,17 @@
 import { Formik } from 'formik'
 import React, { useEffect, useRef } from 'react'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import { toast } from 'react-toastify'
 import Breadcrumb from '../../components/breadcrumb/breadcrumb.component'
 import FormInputHorizontal from '../../components/form-input-horizontal/form-input-horizontal.component'
-import { readItem } from '../../services/crud.service'
+import { createItem, readItem, updateItem } from '../../services/crud.service'
 import { USERS_SUFFIX } from '../../utils/constans'
 
 const UserFormPage = () => {
     const { id } = useParams()
+    const history = useHistory()
     const suffix = USERS_SUFFIX
+    const initialValues = { name: '', username: '', email: '', phone: '', website: '' }
     const formikRef = useRef()
 
     useEffect(() => {
@@ -25,7 +27,7 @@ const UserFormPage = () => {
             }
         }
         if (id !== 'create') {
-           getItem()
+            getItem()
         }
     }, [suffix, id])
 
@@ -35,23 +37,42 @@ const UserFormPage = () => {
             <div className='block'>
                 <div className='box'>
                     <Formik
-                        initialValues={{ name: '', username: '', email: '', phone: '', website: '' }}
+                        initialValues={initialValues}
+                        enableReinitialize={true}
                         onSubmit={async (values, actions) => {
-                            toast.success('Submitted')
+                            if (id === 'create') {
+                                const item = await createItem(suffix, values)
+                                if (item.error) {
+                                    toast.error(item.error.message)
+                                } else {
+                                    toast.success('User created!')
+                                    history.push(`/${USERS_SUFFIX}/${item.id}`)
+                                }
+                            } else {
+                                const item = await updateItem(suffix, id, values)
+                                if (item.error) {
+                                    toast.error(item.error.message)
+                                } else {
+                                    toast.success('User updated!')
+                                }
+                            }
                         }}
                         innerRef={formikRef}
                     >
                         {(formikProps) => (
                             <form onSubmit={formikProps.handleSubmit}>
-                                <FormInputHorizontal
-                                    className='input'
-                                    type='text'
-                                    onChange={formikProps.handleChange}
-                                    onBlur={formikProps.handleBlur}
-                                    value={formikProps.values.id}
-                                    name='id'
-                                    label='Id'
-                                />
+                                {id !== 'create' && (
+                                    <FormInputHorizontal
+                                        className='input'
+                                        type='text'
+                                        onChange={formikProps.handleChange}
+                                        onBlur={formikProps.handleBlur}
+                                        value={formikProps.values.id}
+                                        name='id'
+                                        label='Id'
+                                        disabled
+                                    />
+                                )}
                                 <FormInputHorizontal
                                     className='input'
                                     type='text'

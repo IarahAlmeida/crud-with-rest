@@ -54,7 +54,7 @@ const SignIn = () => {
                                 </div>
                                 {formikProps.errors.token && <div id='feedback'>{formikProps.errors.token}</div>}
                                 <div className='control'>
-                                    <button className='button is-primary is-rounded is-fullwidth mt-6' type='submit'>
+                                    <button className={`button is-primary is-rounded is-fullwidth mt-6 ${formikProps.isSubmitting ? 'is-loading' : ''}`} type='submit'>
                                         Sign In
                                     </button>
                                 </div>

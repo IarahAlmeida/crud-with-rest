@@ -1,7 +1,6 @@
 import React from 'react'
 
 const FormInputHorizontal = ({ label, help, ...otherProps }) => {
-    console.log(otherProps)
     return (
         <div className='field is-horizontal'>
             <div className='field-label is-normal'>

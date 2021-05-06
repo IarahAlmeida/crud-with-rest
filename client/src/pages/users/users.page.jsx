@@ -9,6 +9,7 @@ import { USERS_SUFFIX } from '../../utils/constans'
 const UsersPage = () => {
     const suffix = USERS_SUFFIX
     const [data, setData] = useState([])
+    const [shouldUpdate, setShouldUpdate] = useState(true)
 
     useEffect(() => {
         const getItems = async () => {
@@ -18,9 +19,12 @@ const UsersPage = () => {
             } else {
                 setData(result)
             }
+            setShouldUpdate(false)
         }
-        getItems()
-    }, [suffix])
+        if (shouldUpdate) {
+            getItems()
+        }
+    }, [suffix, shouldUpdate])
 
     const columns = useMemo(
         () => [
@@ -51,7 +55,7 @@ const UsersPage = () => {
             {
                 Header: 'Actions',
                 accessor: 'actions',
-                Cell: (cellProps) => <CrudActions suffix={suffix} id={cellProps.row.values.id} />,
+                Cell: (cellProps) => <CrudActions suffix={suffix} id={cellProps.row.values.id} setShouldUpdate={setShouldUpdate} />,
             },
         ],
         [suffix]
@@ -74,7 +78,7 @@ const UsersPage = () => {
                             </p>
                         </div>
                     </nav>
-                    {data.length > 0 ? <DefaultTable data={data} columns={columns} /> : 'Loading...'}
+                    {data ? <DefaultTable data={data} columns={columns} /> : 'Loading...'}
                 </div>
             </div>
         </div>

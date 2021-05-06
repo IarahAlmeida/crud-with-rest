@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-import { API_URL } from '../utils/constans'
+import { AUTHENTICATION_URL } from '../utils/constans'
 
 export const authenticate = async (token) => {
     const result = await axios
-        .get(`${API_URL}/${token}`)
+        .get(`${AUTHENTICATION_URL}/${token}`)
         .then((response) => {
             if (response.data.login) {
                 return response.data.login
@@ -13,7 +13,7 @@ export const authenticate = async (token) => {
             }
         })
         .catch((error) => {
-            console.log(error)
+            console.error(error)
             return false
         })
     return result

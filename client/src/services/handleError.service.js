@@ -21,7 +21,7 @@ const handleErrorByStatus = (error) => {
         return {
             ...defaultError,
             status: error.response.status,
-            message: error.response.data.message,
+            message: error.response.data.error,
         }
     } else if (error.response.status === 401) {
         return {

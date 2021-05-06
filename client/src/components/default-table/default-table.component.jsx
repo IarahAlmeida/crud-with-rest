@@ -2,16 +2,14 @@ import React from 'react'
 import { useTable } from 'react-table'
 
 const DefaultTable = ({ columns, data }) => {
-    // Use the state and functions returned from useTable to build your UI
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
         columns,
         data,
     })
 
-    // Render the UI for your table
     return (
         <div className='table-container'>
-            <table className='table' {...getTableProps()}>
+            <table className='table is-fullwidth' {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
